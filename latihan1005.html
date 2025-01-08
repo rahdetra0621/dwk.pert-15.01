@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Contoh Hitung Luas Persegi</title>
+</head>
+<body>
+    
+    <h3>Hitung Luas Persegi</h3>
+    <div>Nilai Panjang <input type="text" id="txPanjang"></div>
+    <div>Nilai Lebar <input type="text" id="txLebar"></div>
+    <div><button id="cmdHitung"> Hitung Luas </button></div>
+    <div><span class="vHasil"></span></div>
+
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $('#cmdHitung').on('click',function(){
+                let pj = $('#txPanjang').val()
+                let lb = $('#txLebar').val()
+                let luas = pj*lb
+                let info = "Hitung Luas Persegi<br>"
+                info += "Nilai Panjang: "+pj+"<br>"
+                info += "Nilai Lebar: "+lb+"<br>"
+                info += "Luas = Panjang X Lebar<br>"
+                info += "Luas = "+pj+" X "+lb+",br>"
+                info += "Luas = "+ luas
+                 
+            })
+        })
+    </script>
+</body>
+</html>

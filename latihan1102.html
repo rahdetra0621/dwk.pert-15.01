@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+      .judul{
+        text-align: right;
+        font-size: 20px;
+        font-weight: bold;
+        text-shadow: 2px 2px 10px #000;
+      }
+      .deskripsi{
+        text-align: justify;
+      }
+      .bingkai{
+        border-radius: 20px 0px;
+      }
+      .produkitem{
+        height: 200px;
+        text-align: center;
+        object-fit: cover;
+      }
+      .card-title{
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="container">
+
+        <div class="row">
+            <div class="col-6">
+              <div id="judul" class="judul">isi judul-judulan</div>
+              <div id="deskripsi" class="deskripsi">deskripsi</div>
+              <div class="project">
+                <a href="#produk" class="btn btn-warning">Cek Produk</a>
+              </div>
+            </div>
+            <div class="col">
+                <div id="carouselExample" class="carousel slide">
+                    
+                    <div class="carousel-inner bingkai" id="sliderimg"></div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+            </div>
+        </div>
+
+        <div class="produk">
+          <a name="produk"></a>
+
+          <div id="produklist"></div>
+
+        </div>
+
+        <footer class="text-muted" style="clear:both;">
+          <a href="#">top</a>
+          <p id="kopirig">Copyright 2024</p>
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+      $(function(){
+        var URLAPI = "https://apimhstiki.ptov.my.id"
+        var NIM = "2401010509"
+        let urlProduk = URLAPI+"/"+NIM+"/produk/list"
+        //console.log(urlProduk)
+        
+        $.ajax({
+          url: URLAPI+'/slideshow/'+NIM,
+          method: 'GET',
+          dataType: 'json',
+          success:function(dta){
+            $("#judul").html(dta.judul)
+            $("#deskripsi").html(dta.deskripsi)
+            $("#kopirig").html("Copyright 2024 &copy; "+dta.judul+" by "+dta.nama)
+
+            var slideimg = ""
+
+            dta.images.forEach(function(image, index){
+              var aktif = index === 0 ? ' active' : ''
+            slideimg += `
+            <div class="carousel-item${aktif}">
+              <img src="${image.url}" class="d-block w-100" alt="${image.alt}">
+            </div>`
+            })
+            $("#sliderimg").html(slideimg)
+
+          },
+          error:function(xhr, status, error){
+            console.log('Ajax Error: ',status, error)
+          }
+        })
+
+        $.ajax({
+          url: urlProduk,
+          method: 'GET',
+          dataType: 'json',
+          success: function(dta){
+            if(dta && dta.error==0 ){
+              let tProduk = ''
+              dta.produk.forEach(function(brg,index){
+                tProduk += `<div class="card" style="width: 15rem; float: left; margin:15px;">
+                  <img src="${brg.IMG}" class="card-img-top produkitem" alt="${brg.ITEM}">
+                  <div class="card-body">
+                    <h5 class="card-title">${brg.ITEM}</h5>
+                    <p class="card-text">Rp. ${brg.HRGJUAL},-</p>
+                    <a href="#" class="btn btn-primary">detail</a>
+                    <a href="#" class="btn btn-warning">Beli</a>
+                  </div>
+                </div>`
+              })
+              $('#produklist').html(tProduk)
+            }else{
+              console.log("tidak ada data produk")  
+            }
+          },
+          error: function(xhr,status,error){
+            console.log("Ajax Error: ",status, error)
+          }
+        })
+
+      })
+    </script>
+  </body>
+</html>

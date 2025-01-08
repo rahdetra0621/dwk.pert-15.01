@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Manipulasi Dokumen html</title>
+</head>
+<body>
+
+
+    <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur blanditiis culpa quisquam explicabo sequi sunt dolores reiciendis ab nihil dolorum voluptatibus atque quasi animi voluptatum distinctio recusandae inventore nam, amet tempora odit vitae hic expedita magni. Perspiciatis, laborum. Soluta adipisci cum vero impedit temporibus dignissimos a rerum quod hic illo! Sequi, ullam pariatur. Molestias harum ut quidem corporis. Repudiandae omnis nulla vitae, ratione magni porro illum eveniet cupiditate aut dolorum repellendus impedit iste quis numquam inventore labore sint nemo beatae vero dolorem quaerat eos quasi quidem optio. Tempore laudantium eveniet, molestias sed esse eum repellat quos dolores blanditiis debitis nisi vel, necessitatibus numquam soluta inventore, neque tenetur dolorem maxime aspernatur libero ullam deserunt quas illum. Quas expedita repellendus aperiam rerum ipsam quo voluptas, fugit porro dolores cumque. Ad quis beatae veniam numquam nam porro dolore soluta architecto exercitationem reprehenderit, pariatur neque voluptate quas ratione sapiente aperiam. Nulla eius consequuntur at ullam asperiores sint omnis eveniet. Veritatis cumque magni sequi, voluptates numquam molestiae nobis dicta distinctio tempora consequuntur minus eaque at veniam? Accusantium ullam unde, veritatis qui nisi, omnis provident recusandae exercitationem sunt esse delectus deleniti! Architecto nulla sunt praesentium, accusantium tempore atque voluptate ipsam adipisci distinctio, eveniet maiores vero libero! Fuga hic ex excepturi modi mollitia similique aliquam quis? Consequuntur rem nisi adipisci reiciendis veritatis corrupti sit voluptate provident dolores pariatur, omnis porro nihil eum quidem nulla necessitatibus quae ratione est laboriosam nesciunt laudantium sint! Possimus, quo in adipisci temporibus impedit debitis facere minus dolorem laudantium ea aliquam magnam dolores numquam, similique aperiam, eligendi incidunt commodi. Repellendus laudantium, vero ad deleniti libero rem doloremque numquam voluptas voluptates. Ab, delectus, nostrum dolorem obcaecati quidem expedita dicta atque eligendi rerum commodi necessitatibus dolores, consequatur eaque. Voluptatum sequi cum at tenetur dolorem numquam, neque temporibus quos id alias repudiandae blanditiis perspiciatis placeat dicta!
+    </p>
+    <button class="cmdTampil">Tampilkan Text</button>
+
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $('.cmdTampil').hide()
+
+            $('p').on('click',function(){
+                $(this).hide(500)
+                $('.cmdTampil').show()
+            })
+            $(".cmdTampil").on('click',function(){
+                $('p').show(1000)
+                $(this).hide()
+            })
+        })
+    </script>
+</body>
+</html>

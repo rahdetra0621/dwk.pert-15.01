@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .jarak{
+            padding-top: 15px;
+        }
+    </style>
+   </head>
+  <body>
+    
+    <div class="container">
+        <h3>Konversi Celcius Fahrenheit</h3>
+        <div class="row">
+            <div class="col">
+                <label for="InputC" class="form-label">°Celcius</label>
+                <input type="text" id="nC" class="form-control">
+            </div>
+            <div class="col">
+                <label for="InputF" class="form-label">°Fahrenheit</label>
+                <input type="text" id="nF" class="form-control">
+            </div>
+            
+        </div>
+        <div class="row jarak">
+            <div class="col">
+                <select id="pilih" class="form-select">
+                    <option value="-" disabled>Pilih Jenis Konversi</option>
+                    <option value="c2f">Celcius -> Fahrenheit</option>
+                    <option value="f2c">Fahrenheit -> Celcius</option>
+                </select>
+            </div>
+            <div class="col">
+                <button id="cmdKonvert" class="btn btn-warning"> Konvert </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+            $("#pilih option[value=-]").attr('selected','selected')
+            var hsl = 0
+            var pil = "-"
+            $("#nC").prop("disabled",true)
+            $("#nF").prop("disabled",true)
+
+            $("select").on("change",function(){
+                pil = $("select").val()
+
+                //console.log("debug Nilai pil: "+pil)
+                if(pil=="c2f"){
+                    $("#nC").prop("disabled",false)
+                    $("#nF").prop("disabled",true)
+                }
+                if(pil=="f2c"){
+                    $("#nC").prop("disabled",true)
+                    $("#nF").prop("disabled",false)
+                }
+
+            })
+
+            $("#cmdKonvert").on('click',function(){
+                if(pil=="c2f"){
+                    let ncel = $("#nC").val()
+                    hsl = 9/5*ncel+32
+                    $("#nF").val(hsl)
+                }else{
+                    let nFah = $("#nF").val()
+                    hsl = 5/9*(nFah-32)
+                    $("#nC").val(hsl)
+                }
+            })
+
+        })
+    </script>
+  </body>
+</html>
