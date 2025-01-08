@@ -1,4 +1,4 @@
-var nim="2401010062"
+var nim="2401010477"
 var urlAPI = "https://apimhstiki.ptov.my.id/"
 var urlREAD = urlAPI+`testi-${nim}/read`
 //console.log(urlREAD)

@@ -9,9 +9,18 @@
   <body>
     
     <h1>Tambah Data Testimoni</h1>
+    <a href="latihan1201.html">List Data Testimoni</a>
+
+    <div class="alert alert-success" role="alert" id="inf1">
+      A simple success alert—check it out!
+    </div>
+    <div class="alert alert-danger" role="alert" id="inf2">
+      A simple danger alert—check it out!
+    </div>
+
     <span id="newTesti">
         <form id="fTesti" method="post">
-            <input type="hidden" name="NIM" value="2401010062">
+            <input type="hidden" name="NIM" value="2401010477">
             <input type="hidden" name="ACT" value="stored">
             
             <div class="form-group">
@@ -37,7 +46,42 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-        
+      var nim="2401010477"
+      var urlAPI = "https://apimhstiki.ptov.my.id/"
+      var urlREAD = urlAPI+"testi"
+
+      $("#inf1").hide()
+      $("#inf2").hide()
+
+      $("#fTesti").on('submit',function(ev){
+        ev.preventDefault()
+        let dtTesti= $(this).serialize()
+        $.ajax({
+          url: urlREAD,
+          method: 'POST',
+          dataType: 'json',
+          data: dtTesti,
+          success: function(dt){
+            if(dt.error==0){
+              console.log("data berhasil disimpan")
+              $("#inf1").show()
+              $("inf1").html("Data berhasil disimpan")
+            }else{
+              console.log("Terjadi kegagalan dalam pengiriman data")
+              $("#inf2").show()
+              $("#inf2").html("Terjadi kegagalan dalam menyimpan data di server")
+
+            }
+          },
+          error:function(){
+            console.log("terjadi kegegalan dalam pengiriman data")
+            $("#inf2").show()
+              $("#inf2").html("Terjadi kegagalan dalam menyimpan data di server")
+          }
+        })
+      })
+      
+
     </script>
   </body>
 </html>
